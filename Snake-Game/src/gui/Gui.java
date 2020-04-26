@@ -1,63 +1,52 @@
 package gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
+import gamefield.GameData;
+import gamefield.IGameData;
 
 
 public class Gui extends JFrame {
 	
-	private BufferedImage buffer;
+	private Gamefield gamefield;
 	
 	public Gui() {
-
-	}
-	
-	@Override
-	public void paint(Graphics g) {
-		Dimension dim = getContentPane().getSize();
 		
-		//Graphics2D g2 = (Graphics2D) g;
+		super("Snake");
+		setLayout(new GridBagLayout());
 		
-		if (buffer == null ||
-				buffer.getWidth() != dim.width ||
-				buffer.getHeight() != dim.height) {
-				buffer = new BufferedImage(dim.width, dim.height, BufferedImage.TYPE_4BYTE_ABGR_PRE);
-		}
+		SwingUtilities.invokeLater(new Runnable() {
 			
-		
-		Graphics2D g2 = buffer.createGraphics();
-		g2.setColor(Color.RED);
-		
-		g2.scale(dim.getWidth(), dim.height);
-		g2.fillRect(0, 0, dim.width, dim.height);
-		
-		g.drawImage(buffer, 0, getSize().height - dim.height, null);
-		
+			@Override
+			public void run() {
+				IGameData gamedata = new GameData();
+				
+				gamefield = new Gamefield(gamedata);
+				
+				GridBagConstraints gc = new GridBagConstraints();
+				gc.insets = new Insets(10, 10, 10, 10);
+				gc.gridx = 1;
+				gc.gridy = 1;
+				gc.weightx = 2.0;
+				gc.weighty = 1.0;
+				gc.fill = GridBagConstraints.BOTH;
+
+				getContentPane().add(gamefield, gc);
+				pack();
+				setLocationRelativeTo(null);
+				setSize(900, 600);
+				setVisible(true);
+			}
+		});
 	}
+
 	
 	public static void main(String[] args) {
-		Gui gui = new Gui();
-		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gui.setSize(600,600);
-		gui.setVisible(true);
-		Runnable r = new Runnable() {
-			public void run() {
-				gui.repaint();
-			}
-		};
-		while(true) {
-			SwingUtilities.invokeLater(r);
-			try {
-				Thread.sleep(16);
-			} catch (InterruptedException e) {
-			}
-		}
+		Gui gui = new Gui(); 
 	}
 }
