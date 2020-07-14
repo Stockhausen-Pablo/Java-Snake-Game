@@ -1,36 +1,51 @@
 package gui;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
-import gamefield.CellRendererColor;
-import gamefield.Field_tablemodel;
-import gamefield.IGameData;
+import gamefield.GameData;
+import gamefield.Gametablemodel;
+import gamefield.IGamefield;
 
-public class Gamefield extends JPanel {
+public class Gamefield extends JFrame {
 	
-	private JTable gamefield;
+	IGamefield igf;
 	
-	public Gamefield(IGameData gamedata) {
-		setLayout(new GridBagLayout());
-		gamefield = new JTable(new Field_tablemodel(gamedata));
+	public Gamefield() {
+		IGamefield gamedata = new GameData();
+		JTable gamefield = new JTable(new Gametablemodel(gamedata));
 		
-		//gamefield.getColumnModel().getColumn(getRandomNumberInRange(0, 32)).setCellRenderer(new CellRendererColor());	
-		System.out.println(gamefield.getValueAt(10,10));
-		GridBagConstraints gc = new GridBagConstraints();
-		gc.weightx = 1.0;
-		gc.weighty = 1.0;
-		gc.fill = GridBagConstraints.BOTH;
-		add(gamefield, gc);
+		//Object rowData[] = { "Row1-Column1", "Row1-Column2", "Row1-Column3" };
+		//Object columnNames[] = { "Column One", "Column Two", "Column Three" };
+
+		//DefaultTableModel gamefieldmodel = new DefaultTableModel(32, 32);
+
+
+		//gamefieldmodel.setValueAt("R", 2, 1);
+		//gamefield.setModel(gamefieldmodel);
+		
+		
+		int[][] p = new int[32][32];
+		for (int i = 0; i < p.length; i++) {
+			for (int j = 0; j < p.length; j++) {
+				//System.out.println(p[i][j]);
+			}
+		}
+		//System.out.println(p.length);
+
+		add(gamefield);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(600, 600);
+		setVisible(true);
+
 	}
-	
+
 	public static int getRandomNumberInRange(int min, int max) {
 
 		if (min >= max) {
@@ -40,4 +55,9 @@ public class Gamefield extends JPanel {
 		Random r = new Random();
 		return r.nextInt((max - min) + 1) + min;
 	}
+
+	public static void main(String[] args) {
+		Gamefield gamefield = new Gamefield();
+	}
+
 }
