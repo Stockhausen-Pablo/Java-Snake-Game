@@ -30,9 +30,10 @@ public class Gametablemodel extends AbstractTableModel {
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getValueAt(int row, int col) {
+		Object ret = null;
+		ret = gamefield.getStatus(row, col);
+		return ret;
 	}
 
 }

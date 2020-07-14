@@ -35,5 +35,9 @@ public class GameData implements IGamefield {
 	public void removeGamefieldListener(IGamefieldListener gamefieldlistener) {
 		listeners.remove(gamefieldlistener);
 	}
+	
+	public int getStatus(int x, int y) {
+		return playfield[x][y]; 
+	}
 
 }

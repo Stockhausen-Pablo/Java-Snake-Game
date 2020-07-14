@@ -11,4 +11,6 @@ public interface IGamefield {
 	public void addGamefieldListener(IGamefieldListener gamefieldlistener);
 	
 	public void removeGamefieldListener(IGamefieldListener gamefieldlistener);
+	
+	public int getStatus(int x, int y);
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
+import components.Particle;
 import gamefield.GameData;
 import gamefield.Gametablemodel;
 import gamefield.IGamefield;
@@ -19,7 +21,10 @@ public class Gamefield extends JFrame {
 	
 	public Gamefield() {
 		IGamefield gamedata = new GameData();
+		gamedata.addParticle(new Particle(2, 10, Color.GREEN));
 		JTable gamefield = new JTable(new Gametablemodel(gamedata));
+		
+
 		
 		//Object rowData[] = { "Row1-Column1", "Row1-Column2", "Row1-Column3" };
 		//Object columnNames[] = { "Column One", "Column Two", "Column Three" };
@@ -57,7 +62,6 @@ public class Gamefield extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		//Test123
 		Gamefield gamefield = new Gamefield();
 	}
 
