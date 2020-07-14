@@ -34,5 +34,6 @@ public class Gui extends JFrame {
 		//Test324
 //		window.pollInput();
 //		window.loop();
+		test
 	}
 }
