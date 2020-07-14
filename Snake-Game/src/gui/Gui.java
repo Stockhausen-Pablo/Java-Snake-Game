@@ -30,8 +30,8 @@ public class Gui extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		Window window = new Window(450, 280, "Particles: ");
-		Test
+		//Gui gui = new Gui(450, 280, "Particles: ");
+		//Test324
 //		window.pollInput();
 //		window.loop();
 	}
