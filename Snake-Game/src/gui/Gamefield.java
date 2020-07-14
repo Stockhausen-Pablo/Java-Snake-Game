@@ -57,6 +57,7 @@ public class Gamefield extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		//Test
 		Gamefield gamefield = new Gamefield();
 	}
 
