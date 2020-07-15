@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -8,7 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import components.Particle;
 import gamefield.GameData;
@@ -21,29 +24,35 @@ public class Gamefield extends JFrame {
 	
 	public Gamefield() {
 		IGamefield gamedata = new GameData();
+		DefaultTableCellRenderer color_particles = new DefaultTableCellRenderer();
+		color_particles.setForeground(Color.red);
+		
+		
+		
 		gamedata.addParticle(new Particle(2, 10, Color.GREEN));
-		JTable gamefield = new JTable(new Gametablemodel(gamedata));
+		gamedata.addParticle(new Particle(2, 11, Color.GREEN));
+		gamedata.addParticle(new Particle(2, 12, Color.GREEN));
 		
-
-		
-		//Object rowData[] = { "Row1-Column1", "Row1-Column2", "Row1-Column3" };
-		//Object columnNames[] = { "Column One", "Column Two", "Column Three" };
-
-		//DefaultTableModel gamefieldmodel = new DefaultTableModel(32, 32);
-
-
-		//gamefieldmodel.setValueAt("R", 2, 1);
-		//gamefield.setModel(gamefieldmodel);
-		
-		
-		int[][] p = new int[32][32];
-		for (int i = 0; i < p.length; i++) {
-			for (int j = 0; j < p.length; j++) {
-				//System.out.println(p[i][j]);
+		JTable gamefield = new JTable(new Gametablemodel(gamedata)) {
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
+				Component comp = super.prepareRenderer(renderer, row, col);
+				Object value = getModel().getValueAt(row, col);
+				if (value.equals(1)) {
+					comp.setBackground(Color.red);
+				}else if (value.equals(2)) {
+					comp.setBackground(Color.green);
+				}else {
+					comp.setBackground(Color.white);
+				}				
+				return comp;	
 			}
+		};
+		
+		Boolean running = true;
+		while (running) {
+			re
 		}
-		//System.out.println(p.length);
-
+		
 		add(gamefield);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600, 600);
