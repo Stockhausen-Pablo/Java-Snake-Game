@@ -10,15 +10,6 @@ public class Particle {
 	private int y;;
 	private Color color;
 
-	public void render(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-
-		g2d.setColor(color);
-		//g2d.fillRect(x - (size / 2), y - (size / 2), size, size);
-
-		g2d.dispose();
-	}
-
 	public Particle(int x, int y, Color c) {
 		this.x = x;
 		this.y = y;
